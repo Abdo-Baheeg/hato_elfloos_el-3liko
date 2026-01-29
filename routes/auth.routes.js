@@ -18,14 +18,8 @@ const {
  */
 
 // Public routes
-console.log('🔓 Auth routes loaded - register is PUBLIC');
 router.post(
   '/register',
-  (req, res, next) => {
-    console.log('✅ REGISTER ROUTE HIT - NO AUTH REQUIRED');
-    console.log('Method:', req.method, 'Path:', req.path);
-    next();
-  },
   authLimiter,
   validate(registerSchema),
   AuthController.register
