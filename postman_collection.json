@@ -1,0 +1,766 @@
+{
+  "info": {
+    "_postman_id": "dorm-debt-tracker-api",
+    "name": "Dorm Debt Tracker API",
+    "description": "Production-ready REST API for dorm debt tracking and resolution mobile application. Includes authentication, debt management, group management, and automatic debt resolution features.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refresh_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "dorm_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "debt_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - Authentication",
+      "item": [
+        {
+          "name": "Register New User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('access_token', jsonData.data.tokens.accessToken);",
+                  "    pm.environment.set('refresh_token', jsonData.data.tokens.refreshToken);",
+                  "    pm.environment.set('user_id', jsonData.data.user._id);",
+                  "    pm.test('Registration successful', function() {",
+                  "        pm.response.to.have.status(201);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"ahmed_123\",\n  \"email\": \"ahmed@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"fullName\": \"Ahmed Hassan\",\n  \"phoneNumber\": \"+201234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            },
+            "description": "Register a new user account. Returns user data and JWT tokens (access + refresh)."
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('access_token', jsonData.data.tokens.accessToken);",
+                  "    pm.environment.set('refresh_token', jsonData.data.tokens.refreshToken);",
+                  "    pm.environment.set('user_id', jsonData.data.user._id);",
+                  "    pm.test('Login successful', function() {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmed@example.com\",\n  \"password\": \"SecurePass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Authenticate user and receive access + refresh tokens."
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Access Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('access_token', jsonData.data.accessToken);",
+                  "    pm.test('Token refreshed successfully', function() {",
+                  "        pm.response.to.have.status(200);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/refresh-token",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "refresh-token"]
+            },
+            "description": "Get a new access token using refresh token when access token expires."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            },
+            "description": "Get authenticated user's profile information."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Ahmed Hassan Mohamed\",\n  \"phoneNumber\": \"+201234567890\",\n  \"profilePicture\": \"https://example.com/avatar.jpg\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/profile",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "profile"]
+            },
+            "description": "Update user profile information."
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"SecurePass123!\",\n  \"newPassword\": \"NewSecurePass456!\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/password",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "password"]
+            },
+            "description": "Change user password. Requires current password for verification."
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            },
+            "description": "Logout user and invalidate refresh token."
+          },
+          "response": []
+        }
+      ],
+      "description": "Authentication endpoints for user registration, login, token management, and profile operations."
+    },
+    {
+      "name": "02 - Dorm Groups",
+      "item": [
+        {
+          "name": "Create Dorm Group",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('dorm_id', jsonData.data._id);",
+                  "    pm.test('Group created successfully', function() {",
+                  "        pm.response.to.have.status(201);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dorm 3A - Floor 2\",\n  \"description\": \"Engineering dorm students\",\n  \"settings\": {\n    \"requireApprovalForDebts\": true,\n    \"allowNegativeBalances\": false,\n    \"autoResolveDebts\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/dorms",
+              "host": ["{{base_url}}"],
+              "path": ["dorms"]
+            },
+            "description": "Create a new dorm group. Creator becomes admin automatically."
+          },
+          "response": []
+        },
+        {
+          "name": "Join Dorm Group",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inviteCode\": \"ABC123XYZ\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/dorms/join",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "join"]
+            },
+            "description": "Join an existing dorm group using invite code."
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Groups",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/my-groups",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "my-groups"]
+            },
+            "description": "Get all groups the authenticated user is a member of."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Group Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}"]
+            },
+            "description": "Get detailed information about a specific group including members and stats."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Group",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dorm 3A - Floor 2 (Updated)\",\n  \"description\": \"Updated description\",\n  \"settings\": {\n    \"requireApprovalForDebts\": false\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}"]
+            },
+            "description": "Update group information. Admin only."
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Member",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}/members/:userId",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}", "members", ":userId"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "",
+                  "description": "ID of the user to remove"
+                }
+              ]
+            },
+            "description": "Remove a member from the group. Admin only."
+          },
+          "response": []
+        },
+        {
+          "name": "Leave Group",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}/leave",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}", "leave"]
+            },
+            "description": "Leave a dorm group. Last admin cannot leave."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Group",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}"]
+            },
+            "description": "Delete (archive) a dorm group. Admin only."
+          },
+          "response": []
+        },
+        {
+          "name": "Regenerate Invite Code",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}/regenerate-code",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}", "regenerate-code"]
+            },
+            "description": "Generate a new invite code for the group. Admin only."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Member Role",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}/members/:userId/role",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}", "members", ":userId", "role"],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "",
+                  "description": "ID of the user to update"
+                }
+              ]
+            },
+            "description": "Change a member's role (member/admin). Admin only."
+          },
+          "response": []
+        }
+      ],
+      "description": "Dorm group management endpoints for creating, joining, and managing groups."
+    },
+    {
+      "name": "03 - Debts",
+      "item": [
+        {
+          "name": "Create Debt",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.environment.set('debt_id', jsonData.data._id);",
+                  "    pm.test('Debt created successfully', function() {",
+                  "        pm.response.to.have.status(201);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"debtor\": \"USER_ID_HERE\",\n  \"dormGroup\": \"{{dorm_id}}\",\n  \"amount\": 150.50,\n  \"category\": \"food\",\n  \"description\": \"Pizza delivery split\",\n  \"dueDate\": \"2024-02-01T00:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/debts",
+              "host": ["{{base_url}}"],
+              "path": ["debts"]
+            },
+            "description": "Create a new debt. Authenticated user becomes creditor."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Debts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/debts?page=1&limit=20&status=pending",
+              "host": ["{{base_url}}"],
+              "path": ["debts"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Items per page (max 100)"
+                },
+                {
+                  "key": "status",
+                  "value": "pending",
+                  "description": "Filter by status",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "food",
+                  "description": "Filter by category",
+                  "disabled": true
+                },
+                {
+                  "key": "dormGroup",
+                  "value": "{{dorm_id}}",
+                  "description": "Filter by dorm group",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get all debts with pagination and filtering options."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Debt By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/debts/{{debt_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["debts", "{{debt_id}}"]
+            },
+            "description": "Get detailed information about a specific debt."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Debt",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 175.00,\n  \"description\": \"Updated description\",\n  \"dueDate\": \"2024-02-15T00:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/debts/{{debt_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["debts", "{{debt_id}}"]
+            },
+            "description": "Update debt details. Creditor only."
+          },
+          "response": []
+        },
+        {
+          "name": "Settle Debt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 150.50,\n  \"paymentMethod\": \"cash\",\n  \"proofImage\": \"https://example.com/proof.jpg\",\n  \"notes\": \"Paid in cash\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/debts/{{debt_id}}/settle",
+              "host": ["{{base_url}}"],
+              "path": ["debts", "{{debt_id}}", "settle"]
+            },
+            "description": "Create a payment transaction to settle debt. Debtor or creditor can initiate."
+          },
+          "response": []
+        },
+        {
+          "name": "Add Note to Debt",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Reminder: payment due tomorrow\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/debts/{{debt_id}}/notes",
+              "host": ["{{base_url}}"],
+              "path": ["debts", "{{debt_id}}", "notes"]
+            },
+            "description": "Add a note/comment to a debt."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Debt",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/debts/{{debt_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["debts", "{{debt_id}}"]
+            },
+            "description": "Soft delete a debt. Creditor only. Cannot delete if has confirmed payments."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Debt Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/debts/statistics?dormGroup={{dorm_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["debts", "statistics"],
+              "query": [
+                {
+                  "key": "dormGroup",
+                  "value": "{{dorm_id}}",
+                  "description": "Filter by dorm group (optional)"
+                }
+              ]
+            },
+            "description": "Get debt statistics for authenticated user."
+          },
+          "response": []
+        }
+      ],
+      "description": "Debt management endpoints for creating, updating, settling, and tracking debts."
+    },
+    {
+      "name": "04 - Debt Resolution",
+      "item": [
+        {
+          "name": "Resolve Group Debts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}/resolve",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}", "resolve"]
+            },
+            "description": "Get optimized debt resolution for a group using greedy algorithm. Minimizes transaction count."
+          },
+          "response": []
+        },
+        {
+          "name": "Calculate Debt Between Two Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/debts/resolve/:user1Id/:user2Id",
+              "host": ["{{base_url}}"],
+              "path": ["debts", "resolve", ":user1Id", ":user2Id"],
+              "variable": [
+                {
+                  "key": "user1Id",
+                  "value": "",
+                  "description": "First user ID"
+                },
+                {
+                  "key": "user2Id",
+                  "value": "",
+                  "description": "Second user ID"
+                }
+              ]
+            },
+            "description": "Calculate net debt between two specific users."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Group Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/dorms/{{dorm_id}}/summary",
+              "host": ["{{base_url}}"],
+              "path": ["dorms", "{{dorm_id}}", "summary"]
+            },
+            "description": "Get comprehensive debt summary for a group including balances and recent activity."
+          },
+          "response": []
+        }
+      ],
+      "description": "Debt resolution endpoints for optimizing multi-party debts and calculating net balances."
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["health"]
+        },
+        "description": "Check if server is running and get basic system information."
+      },
+      "response": []
+    }
+  ]
+}

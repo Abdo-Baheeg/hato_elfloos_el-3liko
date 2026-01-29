@@ -1,0 +1,89 @@
+2026-01-29 13:38:35 [error]: Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\jsonwebtoken\sign.js:111:20)
+    at generateAccessToken (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\utils\jwt.js:19:14)
+    at generateTokens (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\utils\jwt.js:73:23)
+    at AuthService.register (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\services\authService.js:48:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\controllers\authController.js:17:20
+2026-01-29 13:38:42 [error]: Error: Email already registered
+    at AuthService.register (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\services\authService.js:31:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\controllers\authController.js:17:20
+2026-01-29 13:39:03 [error]: Error: Username already taken
+    at AuthService.register (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\services\authService.js:34:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\controllers\authController.js:17:20
+2026-01-29 13:39:12 [error]: Error: secretOrPrivateKey must have a value
+    at module.exports [as sign] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\jsonwebtoken\sign.js:111:20)
+    at generateAccessToken (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\utils\jwt.js:19:14)
+    at generateTokens (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\utils\jwt.js:73:23)
+    at AuthService.register (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\services\authService.js:48:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\controllers\authController.js:17:20
+2026-01-29 13:41:30 [error]: Error: Email already registered
+    at AuthService.register (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\services\authService.js:31:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\controllers\authController.js:17:20
+2026-01-29 13:54:05 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:54:14 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:54:24 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:54:25 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:54:27 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:55:23 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:55:45 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:55:47 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5
+2026-01-29 13:57:53 [error]: Error: Validation failed
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\middleware\validate.js:27:13
+    at Layer.handle [as handle_request] (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express\lib\router\route.js:137:13)
+    at C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:807:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async C:\Users\bobah\Desktop\هاتوا الفلوس اللي عليكو\hato_elfloos_el-3liko\node_modules\express-rate-limit\dist\index.cjs:691:5

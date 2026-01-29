@@ -18,6 +18,7 @@ const {
  */
 
 // Public routes
+console.log('🔓 Auth routes loaded - register is PUBLIC');
 router.post(
   '/register',
   authLimiter,
