@@ -5,10 +5,10 @@ const jwt = require('jsonwebtoken');
  * Handles JWT token generation and verification
  */
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-this';
-const JWT_EXPIRE = process.env.JWT_EXPIRE || '7d';
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-key';
-const JWT_REFRESH_EXPIRE = process.env.JWT_REFRESH_EXPIRE || '30d';
+const JWT_SECRET = process.env.JWT_ACCESS_SECRET;
+const JWT_EXPIRE = process.env.JWT_ACCESS_EXPIRATION;
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
+const JWT_REFRESH_EXPIRE = process.env.JWT_REFRESH_EXPIRATION;
 
 /**
  * Generate access token
