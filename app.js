@@ -22,6 +22,9 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
+// Trust proxy - required for Railway deployment
+app.set('trust proxy', 1);
+
 /**
  * ============================================
  * DATABASE CONNECTION
